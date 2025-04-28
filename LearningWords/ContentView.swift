@@ -9,13 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                Text("Learning Words")
+                    .font(.largeTitle)
+                    .bold()
+
+                Text("Flash card game to learn words.")
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+                
+                NavigationLink {
+                    MainView()
+                } label: {
+                    Text("Click to Begin!")
+                }
+                .buttonStyle(BorderedProminentButtonStyle())
+                .tint(.green)
+            }
         }
-        .padding()
+        .navigationBarBackButtonHidden()
     }
 }
 
