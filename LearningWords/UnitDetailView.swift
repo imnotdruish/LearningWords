@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct UnitDetailView: View {
+
     @State var unit: Unit
+    @State private var addedWord = ""
     
     var body: some View {
         NavigationView {
@@ -17,6 +19,7 @@ struct UnitDetailView: View {
                     Text("Created: \(unit.createdAt, style: .date)")
                         .font(.caption)
                         .foregroundColor(.secondary)
+                    TextField("Add a word...", text: $addedWord)
                 }
                 
                 Section {
@@ -24,11 +27,25 @@ struct UnitDetailView: View {
                         ForEach(unit.words, id:\.self) { word in
                             Text(word)
                         }
+                        .onDelete(perform: delete)
                     }
                 }
             }
             .navigationTitle(unit.title)
+            .toolbar {
+                EditButton()
+            }
         }
+    }
+    
+    func saveData() {
+        if let data = try? JSONEncoder().encode(unit) {
+            UserDefaults.standard.set(data, forKey: "Words")
+        }
+    }
+        
+    func delete(at offsets: IndexSet) {
+        unit.words.remove(atOffsets: offsets)
     }
 }
 

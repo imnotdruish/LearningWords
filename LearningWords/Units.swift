@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class Units {
+    let Units: [Unit]
+    
+    init(Units: [Unit]) {
+        self.Units = Units
+    }
+}
