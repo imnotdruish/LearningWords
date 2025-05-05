@@ -10,36 +10,52 @@ import SwiftUI
 struct UnitListView: View {
     @Environment(\.dismiss) var dismiss
     @State private var units = [Unit]()
+    @State private var modifyUnit = false
         
     var body: some View {
         NavigationView {
-            List {
-                ForEach(0..<units.count, id: \.self) { index in
-                    NavigationLink {
-                        UnitDetailView(unit: units[index])
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text(units[index].title)
-                                .font(.headline)
-                                .foregroundStyle(.primary)
-                            Text("\(units[index].createdAt, style: .date)")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+            ZStack {
+                List {
+                    ForEach(0..<units.count, id: \.self) { index in
+                        NavigationLink {
+                            UnitDetailView(unit: units[index])
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(units[index].title)
+                                    .font(.headline)
+                                    .foregroundStyle(.primary)
+                                Text("\(units[index].createdAt, style: .date)")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteUnit)
+                }
+                .navigationTitle("Unit List")
+                .sheet(isPresented: $modifyUnit, onDismiss: loadData, content: CreateUnitView.init)
+                .onAppear(perform: loadData)
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            modifyUnit = true
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .padding()
+                                .background(.green.opacity(0.8))
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
                         }
                     }
                 }
-                .onDelete(perform: deleteUnit)
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .padding()
             }
-            .navigationTitle("Unit List")
-            .toolbar {
-                NavigationLink {
-                    CreateUnitView()
-                } label: {
-                    Image(systemName: "plus")
-                        .accessibilityLabel("Create a Unit")
-                }
-            }
-            .onAppear(perform: loadData)
         }
     }
     

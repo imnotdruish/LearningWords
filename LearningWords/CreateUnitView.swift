@@ -11,7 +11,6 @@ struct CreateUnitView: View {
     @Environment(\.dismiss) var dismiss
 
     @State var units = [Unit]()
-    @State var unit = Unit(title: "", words: [], createdAt: Date())
     
     @State private var wordList: [String] = []
     @State private var newTitle = ""
@@ -47,12 +46,13 @@ struct CreateUnitView: View {
                     Text("Add Unit")
                 }
                 
+                EditButton()
+                
                 Button {
                     dismiss()
                 } label: {
-                    Text("Done")
+                    Text("Cancel")
                 }
-                
             }
             .alert(errorTitle, isPresented: $showingError) {
                 Button("OK", role: .cancel) { }
@@ -93,6 +93,7 @@ struct CreateUnitView: View {
         let unit = Unit(title: trimmedTitle, words: wordList, createdAt: newDate)
         units.insert(unit, at: 0)
         saveData()
+        dismiss()
     }
     
     func wordError(title: String, message: String) {

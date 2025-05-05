@@ -8,6 +8,7 @@
 import Foundation
 
 class Unit: Codable {
+    
     var title: String
     var words: [String]
     var createdAt: Date
@@ -17,7 +18,6 @@ class Unit: Codable {
         self.words = words
         self.createdAt = createdAt
     }
-    
     
     static let example = Unit(title: "Unit One", words: ["bat","cat","fat","hat","mat","pat","rat","sat","chat"], createdAt: Date())
     
