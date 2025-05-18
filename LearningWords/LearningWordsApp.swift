@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct LearningWordsApp: App {
+    @State var score: Int = 0
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(score: $score)
         }
+        .modelContainer(for: Unit.self)
     }
 }

@@ -5,20 +5,22 @@
 //  Created by Dan June on 4/28/25.
 //
 
-import Foundation
+import SwiftData
+import SwiftUI
 
-class Unit: Codable {
+@Model
+class Unit {
     
     var title: String
-    var words: [String]
     var createdAt: Date
-
-    init(title: String, words: [String], createdAt: Date) {
+    @Relationship(deleteRule: .cascade) var words = [Word]()
+    
+    init(title: String = "", createdAt: Date = .now) {
         self.title = title
-        self.words = words
         self.createdAt = createdAt
     }
     
-    static let example = Unit(title: "Unit One", words: ["bat","cat","fat","hat","mat","pat","rat","sat","chat"], createdAt: Date())
-    
+    static let example = Unit(title: "Unit One", createdAt: Date())
 }
+
+

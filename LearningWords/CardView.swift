@@ -15,8 +15,9 @@ struct CardView: View {
     @State private var offset = CGSize.zero
     
     let card: Card
+    @Binding var score: Int
     var removal: (() -> Void)?
-
+        
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -30,23 +31,21 @@ struct CardView: View {
                     ? nil
                     : RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .fill(offset.width > 0 ? .green : .red)
-                    )
+                )
                 .shadow(radius: 10)
-                .padding(.horizontal)
             
             VStack {
                 if voiceOverEnabled {
                     Text(card.word)
-                        .font(.custom("Helvetica", size: 60))
-                        .foregroundStyle(.black)
+                        .font(.system(size: 60, weight: .bold))
+                        .foregroundColor(.black)
                 } else {
                     Text(card.word)
-                        .font(.custom("Helvetica", size: 60))
-                        .foregroundStyle(.black)
+                        .font(.system(size: 60, weight: .bold))
+                        .foregroundColor(.black)
                 }
             }
             .padding()
-            .multilineTextAlignment(.center)
         }
         .frame(width: 450, height: 250)
         .rotationEffect(.degrees(Double(offset.width / 5)))
@@ -54,26 +53,30 @@ struct CardView: View {
         .opacity(2 - Double(abs(offset.width / 50)))
         .accessibilityAddTraits(.isButton)
         .gesture(
-        DragGesture()
-            .onChanged { gesture in
-                offset = gesture.translation
-                feedback.prepare()
-            }
-            .onEnded { _ in
-                if abs(offset.width) > 100 {
-                    if offset.width < 0 {
-                        feedback.notificationOccurred(.error)
-                    }
-                    removal?()
-                } else {
-                    offset = .zero
+            DragGesture()
+                .onChanged { gesture in
+                    offset = gesture.translation
+                    feedback.prepare()
                 }
-            }
-        )
+                .onEnded { _ in
+                    if abs(offset.width) > 100 {
+                        if offset.width < 0 {
+                            feedback.notificationOccurred(.error)
+                        }
+                        if offset.width > 100 {
+                            score += 1
+                        }
+                        removal?()
+                    } else {
+                        offset = .zero
+                    }
+                }
+            )
         .animation(.spring(), value: offset)
+
     }
 }
 
 #Preview {
-    CardView(card: .example)
+    CardView(card: .example, score: .constant(0))
 }

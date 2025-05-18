@@ -5,16 +5,10 @@
 //  Created by Dan June on 5/3/25.
 //
 
-import SwiftUI
-import SwiftData
+import Foundation
 
-@Model
-class Card {
+struct Card: Codable {
     var word: String
-    
-    init(word: String) {
-        self.word = word
-    }
     
     static let example = Card(word: "bat")
 }
