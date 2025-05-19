@@ -16,29 +16,27 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            ZStack {
-                Rectangle()
-                    .fill(.mint.gradient)
-                    .ignoresSafeArea(.all)
-                
-                UnitListingView(sort: sortOrder, searchString: searchText)
-                    .navigationTitle("Unit List")
-                    .navigationDestination(for: Unit.self, destination: EditUnit.init)
-                    .searchable(text: $searchText)
-                    .toolbar {
-                        Button("Add Unit", systemImage: "plus", action: addUnit)
-                        Menu("Sort", systemImage: "arrow.up.arrow.down") {
-                            Picker("Sort", selection: $sortOrder) {
-                                Text("Title")
-                                    .tag(SortDescriptor(\Unit.title))
-                                
-                                Text("Date")
-                                    .tag(SortDescriptor(\Unit.createdAt))
-                            }
-                            .pickerStyle(.inline)
+            UnitListingView(sort: sortOrder, searchString: searchText)
+                .navigationTitle("Unit List")
+                .navigationDestination(for: Unit.self, destination: EditUnit.init)
+                .searchable(text: $searchText)
+                .toolbar {
+                    Button("Add Unit", systemImage: "plus", action: addUnit)
+                    Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                        Picker("Sort", selection: $sortOrder) {
+                            Text("Title")
+                                .tag(SortDescriptor(\Unit.title))
+                            
+                            Text("Date Oldest")
+                                .tag(SortDescriptor(\Unit.createdAt))
+                            
+                            Text("Date Newest")
+                                .tag(SortDescriptor(\Unit.createdAt, order: .reverse))
+
                         }
+                        .pickerStyle(.inline)
                     }
-            }
+                }
         }
         .accentColor(.mint)
     }

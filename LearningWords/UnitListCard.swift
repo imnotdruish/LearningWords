@@ -16,7 +16,7 @@ struct UnitListCard: View {
         VStack(alignment: .leading) {
             Text(unit.title)
                 .font(.headline)
-            Text(unit.createdAt.formatted(date: .long, time: .shortened))
+            Text(unit.createdAt.formatted(date: .numeric, time: .omitted))
         }
     }
 }
