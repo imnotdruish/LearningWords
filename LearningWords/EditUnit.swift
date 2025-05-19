@@ -20,6 +20,8 @@ struct EditUnit: View {
                 ForEach(unit.words) { word in
                     Text(word.text)
                 }
+                .onDelete(perform: deleteWord)
+                
                 HStack {
                     TextField("Add a new word", text: $newWord)
                         .textInputAutocapitalization(.never)
@@ -39,6 +41,12 @@ struct EditUnit: View {
             let word = Word(text: newWord)
             unit.words.append(word)
             newWord = ""
+        }
+    }
+    
+    func deleteWord(_ indexSet: IndexSet) {
+        for index in indexSet {
+            unit.words.remove(at: index)
         }
     }
 }

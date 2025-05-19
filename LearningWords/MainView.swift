@@ -19,8 +19,8 @@ struct MainView: View {
             ZStack {
                 Rectangle()
                     .fill(.mint.gradient)
-                    .ignoresSafeArea(.all
-                    )
+                    .ignoresSafeArea(.all)
+                
                 UnitListingView(sort: sortOrder, searchString: searchText)
                     .navigationTitle("Unit List")
                     .navigationDestination(for: Unit.self, destination: EditUnit.init)
