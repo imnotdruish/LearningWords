@@ -8,13 +8,6 @@
 import SwiftData
 import SwiftUI
 
-extension View {
-    func stacked(at position: Int, in total: Int) -> some View {
-        let offset = Double(total - position)
-        return self.offset(x: 0, y: offset * 10)
-    }
-}
-
 struct CardGameView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     @Environment(\.accessibilityVoiceOverEnabled) var voiceOverEnabled
@@ -22,7 +15,7 @@ struct CardGameView: View {
     @Environment(\.modelContext) var modelContext
     
     @Query(sort: [SortDescriptor(\Unit.title)]) var units: [Unit]
-    
+
     @State private var cards = [Card]()
     @State private var isActive = true
     @State private var selectedUnit = "Placeholder"
@@ -33,7 +26,7 @@ struct CardGameView: View {
             Rectangle()
                 .fill(.gray.gradient)
                 .ignoresSafeArea(.all)
-
+            
             VStack {
                 ZStack {
                     ForEach(0..<cards.count, id: \.self) { index in
@@ -90,7 +83,7 @@ struct CardGameView: View {
                     }
                 }
             }
-
+            
             if differentiateWithoutColor || voiceOverEnabled {
                 VStack {
                     Spacer()
@@ -121,10 +114,10 @@ struct CardGameView: View {
                         }
                         .accessibilityLabel("Correct")
                         .accessibilityHint("Mark your answer as being correct")
-                }
-                .foregroundColor(.white)
-                .font(.largeTitle)
-                .padding()
+                    }
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .padding()
                 }
             }
         }
@@ -163,6 +156,14 @@ struct CardGameView: View {
             isActive = true
         }
         loadData()
+    }
+}
+
+
+extension View {
+    func stacked(at position: Int, in total: Int) -> some View {
+        let offset = Double(total - position)
+        return self.offset(x: 0, y: offset * 10)
     }
 }
 

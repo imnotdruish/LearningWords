@@ -10,18 +10,19 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.modelContext) var modelContext
-    @State private var path = [Unit]()
     @State private var sortOrder = SortDescriptor(\Unit.title)
     @State private var searchText = ""
-    
+    @State private var path = [Unit]()
+
     var body: some View {
         NavigationStack(path: $path) {
             UnitListingView(sort: sortOrder, searchString: searchText)
                 .navigationTitle("Unit List")
-                .navigationDestination(for: Unit.self, destination: EditUnit.init)
+                .navigationDestination(for: Unit.self, destination: EditUnitView.init)
                 .searchable(text: $searchText)
                 .toolbar {
                     Button("Add Unit", systemImage: "plus", action: addUnit)
+                    
                     Menu("Sort", systemImage: "arrow.up.arrow.down") {
                         Picker("Sort", selection: $sortOrder) {
                             Text("Title")

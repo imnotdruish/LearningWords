@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Binding var score: Int
-
+    
     var body: some View {
         TabView {
             Tab("Units", systemImage: "list.bullet") {

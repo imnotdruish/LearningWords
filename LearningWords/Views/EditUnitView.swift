@@ -1,5 +1,5 @@
 //
-//  EditUnit.swift
+//  EditUnitView.swift
 //  LearningWords
 //
 //  Created by Dan June on 5/18/25.
@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct EditUnit: View {
+struct EditUnitView: View {
     @Bindable var unit: Unit
     @State private var newWord = ""
     
