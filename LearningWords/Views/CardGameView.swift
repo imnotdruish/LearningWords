@@ -24,7 +24,7 @@ struct CardGameView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.gray.gradient)
+                .fill(.black.gradient)
                 .ignoresSafeArea(.all)
             
             VStack {
@@ -62,7 +62,7 @@ struct CardGameView: View {
                         }
                         .padding()
                         .background(.white)
-                        .tint(.mint)
+                        .tint(.black)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         
                         if selectedUnit != "Placeholder" {

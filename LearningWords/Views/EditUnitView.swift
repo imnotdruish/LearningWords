@@ -12,7 +12,7 @@ struct EditUnitView: View {
     @Bindable var unit: Unit
     @State private var newWord = ""
     
-    var body: some View {
+    var body: some View {            
         Form {
             TextField("Unit", text: $unit.title)
             

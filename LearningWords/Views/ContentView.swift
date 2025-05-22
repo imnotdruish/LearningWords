@@ -9,23 +9,24 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection = TabType.units
     @Binding var score: Int
     
     var body: some View {
-        TabView {
-            Tab("Units", systemImage: "list.bullet") {
-                MainView()
-            }
-            Tab("Cards", systemImage: "square.stack.3d.down.right.fill") {
-                CardGameView(score: $score)
-            }
-            .tabPlacement(.automatic)
+        TabView(selection: $selection) {
+            MainView()
+                .tag(TabType.units)
+                .toolbarVisibility(.hidden, for: .tabBar)
+            CardGameView(score: $score)
+                .tag(TabType.cards)
+                .toolbarVisibility(.hidden, for: .tabBar)
         }
-        .accentColor(.mint)
+        .safeAreaInset(edge: .bottom) {
+            CustomTabBar(selection: $selection)
+        }
     }
 }
 
 #Preview {
     ContentView(score: .constant(0))
 }
-

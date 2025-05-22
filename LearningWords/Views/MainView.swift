@@ -39,7 +39,7 @@ struct MainView: View {
                     }
                 }
         }
-        .accentColor(.mint)
+        .accentColor(.white)
     }
     
     func addUnit() {
