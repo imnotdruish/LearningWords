@@ -22,106 +22,99 @@ struct CardGameView: View {
     @Binding var score: Int
 
     var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(.black.gradient)
-                .ignoresSafeArea(.all)
-            
-            VStack {
-                ZStack {
-                    ForEach(0..<cards.count, id: \.self) { index in
-                        CardView(card: cards[index], score: $score) {
-                            withAnimation {
-                                removeCard(at: index)
-                            }
+        VStack {
+            ZStack {
+                ForEach(0..<cards.count, id: \.self) { index in
+                    CardView(card: cards[index], score: $score) {
+                        withAnimation {
+                            removeCard(at: index)
                         }
-                        .stacked(at: index, in: cards.count)
-                        .allowsHitTesting(index == cards.count - 1)
-                        .accessibilityHidden(index < cards.count - 1)
                     }
-                }
-                
-                if cards.isEmpty {
-                    VStack {
-                        if selectedUnit != "Placeholder" {
-                            Text("Words Correct: \(score)")
-                                .font(.system(size: 50, weight: .bold))
-                                .foregroundColor(.white)
-                        }
-                        
-                        Picker("Units", selection: $selectedUnit) {
-                            if selectedUnit == "Placeholder" {
-                                Text("Select Unit...")
-                                    .tag("Placeholder")
-                            }
-                            ForEach(units) { unit in
-                                Text(unit.title)
-                                    .tag(unit.title)
-                            }
-                            
-                        }
-                        .padding()
-                        .background(.white)
-                        .tint(.black)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        
-                        if selectedUnit != "Placeholder" {
-                            VStack {
-                                Button {
-                                    setCards(selected: selectedUnit)
-                                } label: {
-                                    Text("Start")
-                                        .font(.largeTitle)
-                                        .fontWeight(.bold)
-                                }
-                                .padding()
-                                .buttonStyle(BorderedProminentButtonStyle())
-                                .tint(.green)
-                            }
-                        }
-                        
-                    }
+                    .stacked(at: index, in: cards.count)
+                    .allowsHitTesting(index == cards.count - 1)
+                    .accessibilityHidden(index < cards.count - 1)
                 }
             }
             
-            if differentiateWithoutColor || voiceOverEnabled {
+            if cards.isEmpty {
                 VStack {
-                    Spacer()
-                    HStack {
-                        Button {
-                            withAnimation {
-                                removeCard(at: cards.count - 1)
-                            }
-                        } label: {
-                            Image(systemName: "xmark.circle")
-                                .padding()
-                                .background(.black.opacity(0.7))
-                                .clipShape(Circle())
-                        }
-                        .accessibilityLabel("Wrong")
-                        .accessibilityHint("Mark your anwser as being incorrect")
-                        
-                        Spacer()
-                        Button {
-                            withAnimation {
-                                removeCard(at: cards.count - 1)
-                            }
-                        } label: {
-                            Image(systemName: "checkmark.circle")
-                                .padding()
-                                .background(.black.opacity(0.7))
-                                .clipShape(Circle())
-                        }
-                        .accessibilityLabel("Correct")
-                        .accessibilityHint("Mark your answer as being correct")
+                    if selectedUnit != "Placeholder" {
+                        Text("Words Correct: \(score)")
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(.white)
                     }
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
+                    
+                    Picker("Units", selection: $selectedUnit) {
+                        if selectedUnit == "Placeholder" {
+                            Text("Select Unit...")
+                                .tag("Placeholder")
+                        }
+                        ForEach(units) { unit in
+                            Text(unit.title)
+                                .tag(unit.title)
+                        }
+                        
+                    }
                     .padding()
+                    .background(.white)
+                    .tint(.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    
+                    if selectedUnit != "Placeholder" {
+                        VStack {
+                            Button {
+                                setCards(selected: selectedUnit)
+                            } label: {
+                                Text("Start")
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                            }
+                            .padding()
+                            .buttonStyle(BorderedProminentButtonStyle())
+                            .tint(.green)
+                        }
+                    }
                 }
             }
         }
         .onAppear(perform: resetCards)
+        
+        if differentiateWithoutColor || voiceOverEnabled {
+            VStack {
+                Spacer()
+                HStack {
+                    Button {
+                        withAnimation {
+                            removeCard(at: cards.count - 1)
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                            .padding()
+                            .background(.black.opacity(0.7))
+                            .clipShape(Circle())
+                    }
+                    .accessibilityLabel("Wrong")
+                    .accessibilityHint("Mark your anwser as being incorrect")
+                    
+                    Spacer()
+                    Button {
+                        withAnimation {
+                            removeCard(at: cards.count - 1)
+                        }
+                    } label: {
+                        Image(systemName: "checkmark.circle")
+                            .padding()
+                            .background(.black.opacity(0.7))
+                            .clipShape(Circle())
+                    }
+                    .accessibilityLabel("Correct")
+                    .accessibilityHint("Mark your answer as being correct")
+                }
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .padding()
+            }
+        }
     }
     
     func loadData() {

@@ -13,7 +13,7 @@ struct LearningWordsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(score: $score)
+            SplashScreen(score: $score)
         }
         .modelContainer(for: Unit.self)
     }

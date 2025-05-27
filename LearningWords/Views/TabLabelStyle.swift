@@ -73,7 +73,7 @@ struct TabLabelStyle: LabelStyle {
                 .font(.caption)
         }
         .symbolVariant(isSelected ? .fill : .none)
-        .foregroundStyle(isSelected ? .mint : .white)
+        .foregroundStyle(isSelected ? .green : .white)
         .frame(maxWidth: .infinity)
     }
 }

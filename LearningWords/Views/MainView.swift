@@ -14,7 +14,7 @@ struct MainView: View {
     @State private var searchText = ""
     @State private var path = [Unit]()
 
-    var body: some View {
+    var body: some View {            
         NavigationStack(path: $path) {
             UnitListingView(sort: sortOrder, searchString: searchText)
                 .navigationTitle("Unit List")
@@ -39,8 +39,15 @@ struct MainView: View {
                     }
                 }
         }
-        .accentColor(.white)
+        .accentColor(.green)
     }
+    
+    init() {
+        // Large Navigation Title
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.green]
+        // Inline Navigation Title
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.green]
+   }
     
     func addUnit() {
         let unit = Unit()

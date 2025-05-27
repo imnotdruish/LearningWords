@@ -15,15 +15,22 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection) {
             MainView()
-                .tag(TabType.units)
-                .toolbarVisibility(.hidden, for: .tabBar)
+                .tabItem {
+                    VStack {
+                        Text("Units")
+                        Image(systemName: "list.bullet")
+                    }
+                }
             CardGameView(score: $score)
-                .tag(TabType.cards)
-                .toolbarVisibility(.hidden, for: .tabBar)
+                .tabItem {
+                    VStack {
+                        Text("Cards")
+                        Image(systemName: "square.stack.3d.down.right.fill")
+                    }
+                }
         }
-        .safeAreaInset(edge: .bottom) {
-            CustomTabBar(selection: $selection)
-        }
+        .accentColor(.green)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
