@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E97F95E92E1AD6DB005B8734 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E97F95E82E1AD6DB005B8734 /* FirebaseFirestore */; };
+		E97F95F42E1B08C3005B8734 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E97F95F32E1B08C3005B8734 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E93FF1B62DBF9A2800A1B5AB /* LearningWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97F95E92E1AD6DB005B8734 /* FirebaseFirestore in Frameworks */,
+				E97F95F42E1B08C3005B8734 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			);
 			name = LearningWords;
 			packageProductDependencies = (
+				E97F95E82E1AD6DB005B8734 /* FirebaseFirestore */,
+				E97F95F32E1B08C3005B8734 /* FirebaseAuth */,
 			);
 			productName = LearningWords;
 			productReference = E93FF1B62DBF9A2800A1B5AB /* LearningWords.app */;
@@ -78,7 +87,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1630;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					E93FF1B52DBF9A2800A1B5AB = {
 						CreatedOnToolsVersion = 16.3;
@@ -94,6 +103,9 @@
 			);
 			mainGroup = E93FF1AD2DBF9A2800A1B5AB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E97F95E72E1AD6DB005B8734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E93FF1B72DBF9A2800A1B5AB /* Products */;
 			projectDirPath = "";
@@ -183,7 +195,9 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -240,7 +254,9 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -249,8 +265,9 @@
 		E93FF1C22DBF9A2900A1B5AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LearningWordsIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6233JXJ2SD;
@@ -276,8 +293,9 @@
 		E93FF1C32DBF9A2900A1B5AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LearningWordsIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6233JXJ2SD;
@@ -322,6 +340,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E97F95E72E1AD6DB005B8734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E97F95E82E1AD6DB005B8734 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E97F95E72E1AD6DB005B8734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		E97F95F32E1B08C3005B8734 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E97F95E72E1AD6DB005B8734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E93FF1AE2DBF9A2800A1B5AB /* Project object */;
 }

@@ -1,5 +1,5 @@
 //
-//  SplashScreen.swift
+//  StartScreen.swift
 //  LearningWords
 //
 //  Created by Dan June on 5/27/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SplashScreen: View {
+struct StartScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var score: Int
     
@@ -20,7 +20,7 @@ struct SplashScreen: View {
                     .offset(x: 0, y: -350)
                 
                 Rectangle()
-                    .fill(.green.gradient)
+                    .fill(.mint.gradient)
                     .rotationEffect(Angle(degrees: 290))
                     .offset(x: 0, y: -400)
                 
@@ -35,18 +35,18 @@ struct SplashScreen: View {
                     Text("Learning Words")
                         .font(.largeTitle)
                         .fontWeight(.black)
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.mint)
                     
                     Image("LearningWords")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 300, height: 300)
                     
-                    NavigationLink(destination: ContentView(score: $score)) {
-                        Text("Let's Begin")
+                    NavigationLink(destination: Login()) {
+                        Text("Continue")
                     }
                     .padding()
-                    .background(.green)
+                    .background(.mint)
                     .clipShape(Capsule())
                     .foregroundStyle(.white)
                 }
@@ -57,5 +57,5 @@ struct SplashScreen: View {
 }
 
 #Preview {
-    SplashScreen(score: .constant(0))
+    StartScreen(score: .constant(0))
 }

@@ -6,15 +6,29 @@
 //
 
 import SwiftUI
+import FirebaseCore
+
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 @main
 struct LearningWordsApp: App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @State var score: Int = 0
     
     var body: some Scene {
         WindowGroup {
-            SplashScreen(score: $score)
+            HomeView()
+//            SplashScreen(score: $score)
         }
-        .modelContainer(for: Unit.self)
+//        .modelContainer(for: Unit.self)
     }
 }
